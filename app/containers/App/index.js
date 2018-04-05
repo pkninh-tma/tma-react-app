@@ -11,8 +11,8 @@ import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
-import Layout from 'containers/Layout';
-import InboxPage from 'containers/InboxPage';
+import Layout from 'components/Layout';
+import MailBox from 'containers/MailBox';
 import FeaturePage from 'containers/FeaturePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -35,7 +35,7 @@ export default function App() {
       </Helmet>
       <Layout>
         <Switch>
-          <Route path="/inbox" component={InboxPage} />
+          <Route path="/inbox" component={MailBox} />
           <Route path="/features" component={FeaturePage} />
           <Route path="/login" component={LoginPage} />
           <Route path="" component={NotFoundPage} />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Grid, Menu, Segment, Label } from 'semantic-ui-react';
+import MailList from 'containers/MailList';
 
 const test1 = (props) => (
   <p>This is test 1</p>
@@ -53,7 +54,7 @@ class InboxPage extends React.Component {
            <Segment>
                <Route path={this.props.match.url + "/sent"} component={test2} />
                <Route path={this.props.match.url + "/trash"} component={test3} />
-               <Route path={this.props.match.url + "/"} exact component={test1} />
+               <Route path={this.props.match.url + "/"} exact component={MailList} />
            </Segment>
          </Grid.Column>
        </Grid>
