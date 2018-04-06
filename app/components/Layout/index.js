@@ -6,7 +6,7 @@ class Layout extends React.Component {
   render() {
     return (
       <div>
-        <SideBar>
+        <SideBar onLogout={this.props.onLogout}>
           <Toolbar/>
           <main>{ this.props.children }</main>
         </SideBar>

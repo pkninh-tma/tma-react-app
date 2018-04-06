@@ -49,7 +49,7 @@ function SideBar(props) {
                  to="/address-book">Address Book
                </NavLink>
              </li>
-             <li>
+             <li onClick={props.onLogout}>
                <NavLink
                   to="/logout">Logout
                 </NavLink>
