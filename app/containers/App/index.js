@@ -9,7 +9,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -21,7 +21,6 @@ import saga from './saga';
 
 import PrivateRoute from 'components/PrivateRoute';
 import MailBox from 'containers/MailBox';
-import FeaturePage from 'containers/FeaturePage/Loadable';
 import Auth from 'containers/Authentication/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
