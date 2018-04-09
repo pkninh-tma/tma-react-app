@@ -20,7 +20,7 @@ import injectSaga from 'utils/injectSaga';
 import saga from './saga';
 
 import PrivateRoute from 'components/PrivateRoute';
-import MailBox from 'containers/MailBox';
+import MailBox from 'containers/MailBox/Loadable';
 import Auth from 'containers/Authentication/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 

@@ -15,9 +15,9 @@ const postConfig = {
   },
 }
 
-function* callAuthService(action) {
+const requestURL = `http://localhost:4000/api/login`;
 
-  const requestURL = `http://localhost:4000/api/login`;
+function* callAuthService(action) {
 
   try {
     const response = yield call(request, requestURL, {

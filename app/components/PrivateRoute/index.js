@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from 'components/Layout';
+import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = (props) => {
@@ -23,5 +24,10 @@ const PrivateRoute = (props) => {
     />
   )
 }
+
+PrivateRoute.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  onLogout: PropTypes.func,
+};
 
 export default PrivateRoute;

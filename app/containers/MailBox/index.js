@@ -1,59 +1,37 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Grid, Menu, Segment, Label } from 'semantic-ui-react';
+import { switchToMailBox } from './actions';
+import { connect } from 'react-redux';
+import { makeSelectActiveItem, makeSelectMenuItems } from './selectors';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+
+import injectReducer from 'utils/injectReducer';
+import reducer from './reducer';
+
+import MailboxMenu from 'components/MailboxMenu';
 import MailList from 'containers/MailList';
 
-const test1 = (props) => (
-  <p>This is test 1</p>
-);
+class Mailbox extends React.Component {
 
-const test2 = (props) => (
-  <p>This is test 2</p>
-);
-
-const test3 = (props) => (
-  <p>This is test 3</p>
-);
-
-class InboxPage extends React.Component {
-  state = { activeItem: 'inbox' }
-
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name })
-    if(name === 'inbox'){
-      this.props.history.push(`${this.props.match.url}`);
-      return;
-    }
-    this.props.history.push(`${this.props.match.url}/${name}`);
-  }
-
-  render(){
-
-    const { activeItem } = this.state
-
-    return(
+  render() {
+    const { activeItem, menuItems, switchMailboxEventHandler } = this.props
+    return (
       <Grid>
          <Grid.Column width={2}>
-           <Menu fluid vertical tabular>
-             <Menu.Item name='inbox' active={activeItem === 'inbox'} onClick={this.handleItemClick} >
-               <Label color='teal'>1</Label>
-               Inbox - All
-             </Menu.Item>
-             <Menu.Item name='sent' active={activeItem === 'sent'} onClick={this.handleItemClick}>
-               <Label>15</Label>
-               Sent
-             </Menu.Item>
-             <Menu.Item name='trash' active={activeItem === 'trash'} onClick={this.handleItemClick}>
-               <Label>10</Label>
-               Trash
-             </Menu.Item>
-           </Menu>
+           <MailboxMenu
+             activeItem = { activeItem }
+             menuItems= { menuItems }
+             rootUrl= { this.props.match.url }
+             clickEvent = { switchMailboxEventHandler }
+           />
          </Grid.Column>
 
          <Grid.Column stretched width={14}>
            <Segment>
-               <Route path={this.props.match.url + "/sent"} component={test2} />
-               <Route path={this.props.match.url + "/trash"} component={test3} />
+               <Route path={this.props.match.url + "/sent"} component={()=>(<p>Sent</p>)} />
+               <Route path={this.props.match.url + "/trash"} component={()=>(<p>Trash</p>)} />
                <Route path={this.props.match.url + "/"} exact component={MailList} />
            </Segment>
          </Grid.Column>
@@ -62,4 +40,21 @@ class InboxPage extends React.Component {
   }
 }
 
-export default InboxPage;
+const mapStateToProps = createStructuredSelector({
+  activeItem: makeSelectActiveItem(),
+  menuItems: makeSelectMenuItems(),
+})
+
+function mapDispatchToProps(dispatch){
+  return {
+    switchMailboxEventHandler: (boxName) => dispatch(switchToMailBox(boxName)),
+  }
+}
+
+const withReducer = injectReducer({ key: 'mailbox', reducer });
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(
+  withReducer,
+  withConnect,
+)(Mailbox);

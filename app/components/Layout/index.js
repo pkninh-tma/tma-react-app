@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Toolbar from 'components/Toolbar';
 import SideBar from 'components/SideBar';
 
@@ -14,5 +15,10 @@ class Layout extends React.Component {
     );
   }
 }
+
+Layout.propTypes = {
+  children: PropTypes.node,
+  onLogout: PropTypes.func,
+};
 
 export default Layout;
