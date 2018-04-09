@@ -10,7 +10,9 @@ import {
   AUTH_SUCCESS,
   AUTH_FAIL,
   AUTH_LOG_OUT,
-  AUTH_REDIRECT_PATH
+  AUTH_REDIRECT_PATH,
+  LOCAL_STORAGE_TOKEN,
+  LOCAL_STORAGE_USERNAME,
 } from './constants';
 
 const initialState = fromJS({
@@ -40,6 +42,8 @@ function authReducer(state = initialState, action) {
         .set('error', action.error)
         .set('loading', false);
     case AUTH_LOG_OUT:
+      localStorage.removeItem(LOCAL_STORAGE_TOKEN);
+      localStorage.removeItem(LOCAL_STORAGE_USERNAME);
       return state
         .set('isLoggedIn', false)
         .set('token', null)

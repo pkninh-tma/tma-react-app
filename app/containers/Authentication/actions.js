@@ -10,13 +10,13 @@ import {
   AUTH_FAIL,
   AUTH_CHECK_TOKEN,
   AUTH_LOG_OUT,
-  AUTH_REDIRECT_PATH
+  AUTH_REDIRECT_PATH,
 } from './constants';
 
 export const authStart = (authInfo) => {
   return {
     type: AUTH_START,
-    authInfo
+    authInfo,
   };
 };
 
@@ -49,9 +49,7 @@ export const authCheckToken = () => {
 };
 
 export const authLogout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('username');
   return {
-    type: AUTH_LOG_OUT
+    type: AUTH_LOG_OUT,
   };
 };

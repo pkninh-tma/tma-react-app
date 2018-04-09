@@ -15,9 +15,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectIsLoggedIn } from 'containers/Authentication/selectors';
-import { authCheckToken, authLogout } from 'containers/Authentication/actions';
+import { authLogout } from 'containers/Authentication/actions';
+import injectSaga from 'utils/injectSaga';
+import saga from './saga';
 
-import Layout from 'components/Layout';
+import PrivateRoute from 'components/PrivateRoute';
 import MailBox from 'containers/MailBox';
 import FeaturePage from 'containers/FeaturePage/Loadable';
 import Auth from 'containers/Authentication/Loadable';
@@ -30,38 +32,24 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-const RedirectToLogin = () => <Redirect to="/login" />
-
 class App extends React.Component {
 
-  componentDidMount () {
-    this.props.autoLoginHandler();
-  }
-
   render(){
-    let layout = (
-      <Switch>
-        <Route path="/login" component={Auth} />
-        <Route path="" component={RedirectToLogin} />
-      </Switch>
+
+    const { isLoggedIn, logoutEventHandler } = this.props;
+
+    let app = (
+        <Switch>
+          <Route path="/login" component={Auth} />
+          <PrivateRoute
+            path="/inbox"
+            component={MailBox}
+            isLoggedIn={isLoggedIn}
+            onLogout={logoutEventHandler}
+          />
+          <Route path="" component={NotFoundPage} />
+        </Switch>
     )
-
-    if(this.props.isLoggedIn){
-
-      if(this.props.location.pathname === "/login"){
-        this.props.history.push('/inbox');
-      }
-      
-      layout = (
-        <Layout onLogout={this.props.logoutEventHandler}>
-          <Switch>
-            <Route path="/inbox" component={MailBox} />
-            <Route path="/features" component={FeaturePage} />
-            <Route path="" component={NotFoundPage} />
-          </Switch>
-        </Layout>
-      )
-    }
 
     return (
       <AppWrapper>
@@ -70,7 +58,7 @@ class App extends React.Component {
           defaultTitle="React.js Boilerplate">
           <meta name="description" content="A React.js Boilerplate application" />
         </Helmet>
-          {layout}
+          {app}
       </AppWrapper>
     );
   }
@@ -82,12 +70,16 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    autoLoginHandler: () => dispatch(authCheckToken()),
-    loginEventHandler: (authInfo) => dispatch(authStart(authInfo)),
     logoutEventHandler: () => dispatch(authLogout()),
   };
 }
 
+const withSaga = injectSaga({ key: 'app', saga });
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default withRouter(withConnect(App));
+export default withRouter(
+  compose(
+    withSaga,
+    withConnect,
+  )(App)
+);

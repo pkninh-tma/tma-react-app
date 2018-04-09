@@ -23,7 +23,7 @@ import Spinner from 'components/LoadingIndicator';
 export class Authentication extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   handleSubmit = (values) => {
-    this.props.loginEventHandler(values)
+    this.props.loginEventHandler(values);
   }
 
   render() {
