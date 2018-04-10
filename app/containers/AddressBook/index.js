@@ -5,53 +5,91 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Grid, Segment } from 'semantic-ui-react';
+import { Grid, Segment, Input } from 'semantic-ui-react';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { makeSelectContacts } from './selectors';
+import { searchInContact, updateContact } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 // import messages from './messages';
+import {
+  makeSelectContactFiltered,
+  makeSelectLoading,
+  makeSelectSearchKeys,
+  makeSelectUpdating,
+  makeSelectUpdatedItem
+} from './selectors';
 
-import ContactForm from '../../components/ContactForm';
-import ContactList from '../../components/ContactList';
+import ContactForm from 'components/ContactForm';
+import ContactList from 'components/ContactList';
+import LoadingIndicator from 'components/LoadingIndicator';
 
-export class AddressBook extends React.Component { // eslint-disable-line react/prefer-stateless-function
+const AddressBook = ({ loading, displayContact, searchKeys, updating, updatedItem, searchChangeHandler, updateContactHandler }) => (
+  <Grid>
+    <Grid.Column width={7}>
+      <Segment>
+        {
+          loading
+            ? <LoadingIndicator />
+            : (
+              <div>
+                <Input
+                  placeholder="Search ..."
+                  fluid
+                  value={ searchKeys }
+                  onChange={ e => searchChangeHandler(e.target.value) }
+                />
+                <ContactList
+                  contacts={ displayContact }
+                  clicked={ updateContactHandler }
+                />
+              </div>
+            )
+        }
+      </Segment>
+    </Grid.Column>
 
-  handleSubmit = values => {
-    console.log(values)
-  }
+    <Grid.Column stretched width={9}>
+      <Segment>
+        <ContactForm
+          onSubmit={()=> console.log("TODO: Implement on submit()")}
+          isUpdate={ updating }
+          item={ updatedItem }
+        />
+      </Segment>
+    </Grid.Column>
+  </Grid>
+)
 
-  render() {
-    return (
-      <Grid>
-        <Grid.Column width={7}>
-          <Segment>
-            <p>Searching Bar</p>
-            <ContactList contacts={this.props.contacts} />
-          </Segment>
-        </Grid.Column>
+AddressBook.propTypes = {
+  displayContact: PropTypes.array,
+  loading: PropTypes.bool,
+  searchKeys: PropTypes.string,
+  searchChangeHandler: PropTypes.func,
+};
 
-        <Grid.Column stretched width={9}>
-          <Segment>
-            <ContactForm onSubmit={this.handleSubmit} />
-          </Segment>
-        </Grid.Column>
-      </Grid>
-    );
+const mapStateToProps = createStructuredSelector({
+  displayContact: makeSelectContactFiltered(),
+  loading: makeSelectLoading(),
+  searchKeys: makeSelectSearchKeys(),
+  updating: makeSelectUpdating(),
+  updatedItem: makeSelectUpdatedItem(),
+});
+
+function mapDispatchToProps(dispatch){
+  return {
+    searchChangeHandler: (val) => dispatch(searchInContact(val)),
+    updateContactHandler: (id) => dispatch(updateContact(id)),
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  contacts: makeSelectContacts(),
-});
-
-const withConnect = connect(mapStateToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'addressBook', reducer });
 const withSaga = injectSaga({ key: 'addressBook', saga });
 

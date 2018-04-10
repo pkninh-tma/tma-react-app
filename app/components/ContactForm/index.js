@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form/immutable';
 import { Button, Form, Grid } from 'semantic-ui-react';
 
 function ContactForm(props) {
-  const { handleSubmit,
+  const { handleSubmit, isUpdate, item
     // pristine, reset, submitting
   } = props;
   return (
@@ -48,7 +48,7 @@ function ContactForm(props) {
           />
         </Grid.Column>
         <Grid.Column>
-          <Button>Save</Button>
+          <Button>{ isUpdate ? 'Update' : 'Add'}</Button>
         </Grid.Column>
       </Grid>
     </Form>
@@ -56,7 +56,9 @@ function ContactForm(props) {
 }
 
 ContactForm.propTypes = {
-  handleSubmit: PropTypes.any,
+  handleSubmit: PropTypes.func,
+  isUpdate: PropTypes.bool,
+  item: PropTypes.any,
   // pristine: PropTypes.any,
   // reset: PropTypes.any,
   // submitting: PropTypes.any,

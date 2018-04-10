@@ -15,7 +15,7 @@ const postConfig = {
   },
 };
 
-const requestURL = 'http://localhost:4000/api/login';
+const requestURL = 'api/login';
 
 function* callAuthService(action) {
   try {

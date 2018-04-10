@@ -1,13 +1,11 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { contactFetchedSuccess, contactFetchedFail } from 'containers/AddressBook/actions';
+import { fetchContacts, contactFetchedSuccess, contactFetchedFail } from 'containers/AddressBook/actions';
 import {
-  FETCH_CONTACTS,
-  FETCH_CONTACTS_SUCCESS,
-  FETCH_CONTACTS_FAIL,
+  FETCH_CONTACTS
 } from 'containers/AddressBook/constants';
 import request from 'utils/request';
 
-const requestURL = 'http://localhost:4000/api/contact';
+const requestURL = 'api/contact';
 
 export function* fetchContactData(){
   try {
@@ -29,5 +27,6 @@ export function* fetchContactData(){
 
 // Individual exports for testing
 export default function* addressBookSaga() {
+  yield put(fetchContacts());
   yield fetchContactData();
 }

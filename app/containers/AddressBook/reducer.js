@@ -8,11 +8,16 @@ import {
   FETCH_CONTACTS,
   FETCH_CONTACTS_SUCCESS,
   FETCH_CONTACTS_FAIL,
+  UPDATE_CONTACT,
+  SEARCHING,
 } from './constants';
 
 const initialState = {
   loading: false,
   error: false,
+  searchKeys: '',
+  updating: false,
+  updatedId: null,
   contacts: [],
 };
 
@@ -35,6 +40,17 @@ function addressBookReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.error,
+      };
+    case SEARCHING:
+      return {
+        ...state,
+        searchKeys: action.value,
+      };
+    case UPDATE_CONTACT:
+      return {
+        ...state,
+        updating: true,
+        updatedId: action.contactId,
       };
     default:
       return state;

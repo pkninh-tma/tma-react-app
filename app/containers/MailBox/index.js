@@ -38,9 +38,9 @@ const Mailbox = ({ activeItem, menuItems, switchMailboxEventHandler, match: { ur
 
 
 Mailbox.propTypes = {
-  activeItem: PropTypes.any,
-  menuItems: PropTypes.any,
-  switchMailboxEventHandler: PropTypes.any,
+  activeItem: PropTypes.string,
+  menuItems: PropTypes.array,
+  switchMailboxEventHandler: PropTypes.func,
   match: PropTypes.any,
 };
 

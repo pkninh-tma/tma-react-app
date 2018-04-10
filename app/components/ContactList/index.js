@@ -5,7 +5,11 @@ import ContactItem from 'components/ContactItem';
 
 function ContactList(props) {
   const contactItems = props.contacts.map(contact => (
-    <ContactItem key={contact.email} {...contact} />
+    <ContactItem
+       key={ contact._id }
+       { ...contact }
+       clickListener={ ()=> props.clicked(contact._id) }
+     />
   ));
 
   return (
@@ -17,6 +21,7 @@ function ContactList(props) {
 
 ContactList.propTypes = {
   contacts: PropTypes.array,
+  clicked: PropTypes.func,
 };
 
 export default ContactList;
