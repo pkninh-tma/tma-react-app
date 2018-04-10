@@ -27,7 +27,6 @@
   - [LESS](css/README.md#less)
 - [JS](js)
   - [Redux](js/redux.md)
-  - [ImmutableJS](js/immutablejs.md)
   - [reselect](js/reselect.md)
   - [redux-saga](js/redux-saga.md)
   - [i18n](js/i18n.md)

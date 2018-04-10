@@ -4,9 +4,8 @@ import { replace } from 'react-router-redux';
 import {
   LOCAL_STORAGE_TOKEN,
   LOCAL_STORAGE_USERNAME,
-  AUTH_LOG_OUT
+  AUTH_LOG_OUT,
 } from 'containers/Authentication/constants';
-import request from 'utils/request';
 
 function* checkAuthState() {
   const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
@@ -19,6 +18,8 @@ function* checkAuthState() {
 }
 
 function* doLogout() {
+  localStorage.removeItem(LOCAL_STORAGE_TOKEN);
+  localStorage.removeItem(LOCAL_STORAGE_USERNAME);
   yield put(replace('/login'));
 }
 

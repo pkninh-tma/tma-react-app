@@ -1,4 +1,4 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import { LOAD_MAILS } from 'containers/MailList/constants';
 import { mailsLoaded, mailsLoadingError } from 'containers/MailList/actions';
 

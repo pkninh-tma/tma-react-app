@@ -1,54 +1,57 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { Grid, Menu, Segment, Label } from 'semantic-ui-react';
-import { switchToMailBox } from './actions';
-import { connect } from 'react-redux';
-import { makeSelectActiveItem, makeSelectMenuItems } from './selectors';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
-
 import injectReducer from 'utils/injectReducer';
-import reducer from './reducer';
+import { createStructuredSelector } from 'reselect';
+import PropTypes from 'prop-types';
 
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { Grid, Segment } from 'semantic-ui-react';
 import MailboxMenu from 'components/MailboxMenu';
 import MailList from 'containers/MailList';
+import { switchToMailBox } from './actions';
+import { makeSelectActiveItem, makeSelectMenuItems } from './selectors';
 
-class Mailbox extends React.Component {
+import reducer from './reducer';
 
-  render() {
-    const { activeItem, menuItems, switchMailboxEventHandler } = this.props
-    return (
-      <Grid>
-         <Grid.Column width={2}>
-           <MailboxMenu
-             activeItem = { activeItem }
-             menuItems= { menuItems }
-             rootUrl= { this.props.match.url }
-             clickEvent = { switchMailboxEventHandler }
-           />
-         </Grid.Column>
+const Mailbox = ({ activeItem, menuItems, switchMailboxEventHandler, match: { url } }) => (
+  <Grid>
+    <Grid.Column width={2}>
+      <MailboxMenu
+        activeItem={activeItem}
+        menuItems={menuItems}
+        rootUrl={url}
+        clickEvent={switchMailboxEventHandler}
+      />
+    </Grid.Column>
 
-         <Grid.Column stretched width={14}>
-           <Segment>
-               <Route path={this.props.match.url + "/sent"} component={()=>(<p>Sent</p>)} />
-               <Route path={this.props.match.url + "/trash"} component={()=>(<p>Trash</p>)} />
-               <Route path={this.props.match.url + "/"} exact component={MailList} />
-           </Segment>
-         </Grid.Column>
-       </Grid>
-    );
-  }
-}
+    <Grid.Column stretched width={14}>
+      <Segment>
+        <Route path={`${url}/sent`} component={() => (<p>Sent</p>)} />
+        <Route path={`${url}/trash`} component={() => (<p>Trash</p>)} />
+        <Route path={`${url}/`} exact component={MailList} />
+      </Segment>
+    </Grid.Column>
+  </Grid>
+);
+
+
+Mailbox.propTypes = {
+  activeItem: PropTypes.any,
+  menuItems: PropTypes.any,
+  switchMailboxEventHandler: PropTypes.any,
+  match: PropTypes.any,
+};
 
 const mapStateToProps = createStructuredSelector({
   activeItem: makeSelectActiveItem(),
   menuItems: makeSelectMenuItems(),
-})
+});
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
-    switchMailboxEventHandler: (boxName) => dispatch(switchToMailBox(boxName)),
-  }
+    switchMailboxEventHandler: boxName => dispatch(switchToMailBox(boxName)),
+  };
 }
 
 const withReducer = injectReducer({ key: 'mailbox', reducer });

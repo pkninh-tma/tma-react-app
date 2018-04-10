@@ -95,7 +95,8 @@
     "plugins": [
       "redux-saga",
       "react",
-      "jsx-a11y"
+      "jsx-a11y",
+      "fp"
     ],
     "parserOptions": {
       "ecmaVersion": 6,
@@ -107,7 +108,7 @@
     "rules": {
       "arrow-parens": [
         "error",
-        "always"
+        "as-needed"
       ],
       "arrow-body-style": [
         2,
@@ -140,7 +141,13 @@
       "jsx-a11y/mouse-events-have-key-events": 2,
       "jsx-a11y/role-has-required-aria-props": 2,
       "jsx-a11y/role-supports-aria-props": 2,
-      "max-len": 0,
+      "max-len": [
+        "error",
+        200,
+        {
+          "comments": 300
+        }
+      ],
       "newline-per-chained-call": 0,
       "no-confusing-arrow": 0,
       "no-console": 1,
@@ -158,7 +165,25 @@
       "react/self-closing-comp": 0,
       "redux-saga/no-yield-in-race": 2,
       "redux-saga/yield-effects": 2,
-      "require-yield": 0
+      "require-yield": 0,
+      "fp/no-arguments": "error",
+      "fp/no-class": "off",
+      "fp/no-delete": "error",
+      "fp/no-events": "error",
+      "fp/no-get-set": "error",
+      "fp/no-let": "off",
+      "fp/no-loops": "error",
+      "fp/no-mutating-assign": "error",
+      "fp/no-mutating-methods": "error",
+      "fp/no-mutation": "off",
+      "fp/no-nil": "off",
+      "fp/no-proxy": "error",
+      "fp/no-rest-parameters": "error",
+      "fp/no-this": "off",
+      "fp/no-throw": "off",
+      "fp/no-unused-expression": "off",
+      "fp/no-valueof-field": "error",
+      "no-var": "error"
     },
     "settings": {
       "import/resolver": {
@@ -222,7 +247,6 @@
     "fontfaceobserver": "2.0.9",
     "history": "4.6.3",
     "hoist-non-react-statics": "2.1.1",
-    "immutable": "3.8.1",
     "intl": "1.2.5",
     "invariant": "2.2.2",
     "ip": "1.1.5",
@@ -237,9 +261,9 @@
     "react-redux": "5.0.5",
     "react-router-dom": "4.1.1",
     "react-router-redux": "5.0.0-alpha.6",
+    "recompose": "^0.26.0",
     "redux": "3.6.0",
     "redux-form": "^7.3.0",
-    "redux-immutable": "4.0.0",
     "redux-persist": "^5.9.1",
     "redux-saga": "0.15.3",
     "reselect": "3.0.1",
@@ -284,6 +308,7 @@
     "eslint-plugin-jsx-a11y": "5.0.3",
     "eslint-plugin-react": "7.0.1",
     "eslint-plugin-redux-saga": "0.3.0",
+    "eslint-plugin-fp": "^2.3.0",
     "eventsource-polyfill": "0.9.6",
     "exports-loader": "0.6.4",
     "file-loader": "0.11.1",

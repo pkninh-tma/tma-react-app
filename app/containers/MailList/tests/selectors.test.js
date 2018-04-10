@@ -1,4 +1,3 @@
-// import { fromJS } from 'immutable';
 // import { selectMailListDomain } from '../selectors';
 
 describe('selectMailListDomain', () => {

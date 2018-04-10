@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the Authentication state domain
  */
-const selectAuthDomain = (state) => state.get('auth');
+const selectAuthDomain = state => state.auth;
 
 /**
  * Other specific selectors
@@ -14,22 +14,22 @@ const selectAuthDomain = (state) => state.get('auth');
  */
 const makeSelectToken = () => createSelector(
   selectAuthDomain,
-  (state) => state.get('tokenId')
+  state => state.tokenId
 );
 
 const makeSelectIsLoggedIn = () => createSelector(
   selectAuthDomain,
-  (state) => state.get('isLoggedIn')
+  state => state.isLoggedIn
 );
 
 const makeSelectLoading = () => createSelector(
   selectAuthDomain,
-  (state) => state.get('loading')
+  state => state.loading
 );
 
 export {
   selectAuthDomain,
   makeSelectToken,
   makeSelectIsLoggedIn,
-  makeSelectLoading
+  makeSelectLoading,
 };

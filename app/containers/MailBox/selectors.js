@@ -1,19 +1,19 @@
 import { createSelector } from 'reselect';
 
-const selectMailboxDomain = (state) => state.get('mailbox');
+const selectMailboxDomain = state => state.mailbox;
 
 const makeSelectActiveItem = () => createSelector(
   selectMailboxDomain,
-  (state) => state.get('activeItem')
+  state => state.activeItem
 );
 
 const makeSelectMenuItems = () => createSelector(
   selectMailboxDomain,
-  (state) => state.get('menuItems').toJS()
+  state => state.menuItems
 );
 
 export {
   selectMailboxDomain,
   makeSelectActiveItem,
-  makeSelectMenuItems
+  makeSelectMenuItems,
 };

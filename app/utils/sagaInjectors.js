@@ -13,15 +13,15 @@ import {
 
 const allowedModes = [RESTART_ON_REMOUNT, DAEMON, ONCE_TILL_UNMOUNT];
 
-const checkKey = (key) => invariant(
+const checkKey = key => invariant(
   isString(key) && !isEmpty(key),
   '(app/utils...) injectSaga: Expected `key` to be a non empty string'
 );
 
-const checkDescriptor = (descriptor) => {
+const checkDescriptor = descriptor => {
   const shape = {
     saga: isFunction,
-    mode: (mode) => isString(mode) && allowedModes.includes(mode),
+    mode: mode => isString(mode) && allowedModes.includes(mode),
   };
   invariant(
     conformsTo(descriptor, shape),
@@ -39,6 +39,7 @@ export function injectSagaFactory(store, isValid) {
     checkKey(key);
     checkDescriptor(newDescriptor);
 
+    /* eslint-disable fp/no-let */
     let hasSaga = Reflect.has(store.injectedSagas, key);
 
     if (process.env.NODE_ENV !== 'production') {

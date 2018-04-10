@@ -1,8 +1,9 @@
 import React from 'react';
-import ToolBar from 'components/ToolBar';
+// import ToolBar from 'components/ToolBar';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { Icon } from 'semantic-ui-react';
+// import { Icon } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const FlexContainer = styled.div`
   display: -webkit-flex;
@@ -22,45 +23,41 @@ const Content = styled.div`
   height: 100vh;
 `;
 
-const SideDrawFooter = styled.div`
-  position: absolute;
-  width: 200px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
-`;
+// const SideDrawFooter = styled.div`
+//   position: absolute;
+//   width: 200px;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   padding: 1rem;
+//   background-color: #efefef;
+//   text-align: center;
+// `;
 
+const SideBar = ({ onLogout, children }) => (
+  <FlexContainer>
+    <SideNav>
+      <ul>
+        <li>
+          <NavLink to="/inbox" exact>Inbox</NavLink>
+        </li>
+        <li>
+          <NavLink to="/address-book">Address Book</NavLink>
+        </li>
+        <li>
+          <NavLink onClick={onLogout} to="/login">Logout</NavLink>
+        </li>
+      </ul>
+    </SideNav>
+    <Content>
+      {children}
+    </Content>
+  </FlexContainer>
+);
 
-function SideBar(props) {
-  return (
-    <FlexContainer>
-       <SideNav>
-         <ul>
-           <li>
-             <NavLink
-                to="/inbox" exact>Inbox
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                 to="/address-book">Address Book
-               </NavLink>
-             </li>
-             <li onClick={props.onLogout}>
-               <NavLink
-                  to="/logout">Logout
-                </NavLink>
-              </li>
-         </ul>
-       </SideNav>
-       <Content>
-         {props.children}
-       </Content>
-    </FlexContainer>
-  )
-}
+SideBar.propTypes = {
+  onLogout: PropTypes.func,
+  children: PropTypes.any,
+};
 
 export default SideBar;

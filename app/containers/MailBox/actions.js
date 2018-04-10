@@ -3,9 +3,7 @@ import {
 } from './constants';
 
 
-export const switchToMailBox = (targetBox) => {
-  return {
-    type: SWITCH_BOX,
-    targetBox
-  };
-};
+export const switchToMailBox = targetBox => ({
+  type: SWITCH_BOX,
+  targetBox,
+});

@@ -11,21 +11,20 @@ import request from 'utils/request';
 const postConfig = {
   method: 'POST',
   headers: {
-    'content-type': 'application/json'
+    'content-type': 'application/json',
   },
-}
+};
 
-const requestURL = `http://localhost:4000/api/login`;
+const requestURL = 'http://localhost:4000/api/login';
 
 function* callAuthService(action) {
-
   try {
     const response = yield call(request, requestURL, {
       ...postConfig,
-      body: JSON.stringify(action.authInfo)
+      body: JSON.stringify(action.authInfo),
     });
 
-    if(response.status === 'Fail'){
+    if (response.status === 'Fail') {
       throw new Error(response.message);
     }
     localStorage.setItem(LOCAL_STORAGE_TOKEN, response.token);

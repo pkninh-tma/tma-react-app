@@ -1,13 +1,18 @@
 import React from 'react';
 import { Dimmer, Loader, Segment } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
-const Spinner = (props) => (
+const Spinner = ({ children }) => (
   <Segment>
     <Dimmer active>
-      <Loader content='Loading' />
+      <Loader content="Loading" />
     </Dimmer>
-    { props.children }
+    {children}
   </Segment>
 );
+
+Spinner.propTypes = {
+  children: PropTypes.any,
+};
 
 export default Spinner;

@@ -29,7 +29,9 @@ export const formatTranslationMessages = (locale, messages) => {
     const formattedMessage = !messages[key] && locale !== DEFAULT_LOCALE
       ? defaultFormattedMessages[key]
       : messages[key];
-    return Object.assign(formattedMessages, { [key]: formattedMessage });
+    /* eslint-disable fp/no-mutating-assign */
+    // return Object.assign(formattedMessages, { [key]: formattedMessage });
+    return { ...formattedMessages, [key]: formattedMessage };
   }, {});
 };
 

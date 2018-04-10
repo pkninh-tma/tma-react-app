@@ -5,24 +5,26 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
-import { authStart } from 'containers/Authentication/actions';
-import { Redirect } from 'react-router-dom';
-import { makeSelectLoading, makeSelectIsLoggedIn } from './selectors';
+import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
-
-import injectSaga from 'utils/injectSaga';
-import saga from './saga';
-import messages from './messages';
+import { authStart } from 'containers/Authentication/actions';
+// import { Redirect } from 'react-router-dom';
+// import messages from './messages';
 import LoginForm from 'components/LoginForm';
 import Spinner from 'components/LoadingIndicator';
+import injectSaga from 'utils/injectSaga';
+
+import { makeSelectLoading } from './selectors';
+
+import saga from './saga';
 
 export class Authentication extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  handleSubmit = (values) => {
+  handleSubmit = values => {
     this.props.loginEventHandler(values);
   }
 
@@ -30,13 +32,16 @@ export class Authentication extends React.Component { // eslint-disable-line rea
     return (
       <div>
         <LoginForm onSubmit={this.handleSubmit} />;
-        { this.props.loading ? <Spinner /> : null }
+        {this.props.loading ? <Spinner /> : null}
       </div>
-    )
+    );
   }
 }
 
-Authentication.propTypes = {};
+Authentication.propTypes = {
+  loginEventHandler: PropTypes.func,
+  loading: PropTypes.any,
+};
 
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
@@ -44,7 +49,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    loginEventHandler: (authInfo) => dispatch(authStart(authInfo)),
+    loginEventHandler: authInfo => dispatch(authStart(authInfo)),
   };
 }
 

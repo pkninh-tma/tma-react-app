@@ -5,25 +5,25 @@ import { Menu } from 'semantic-ui-react';
 
 function MailboxMenu(props) {
   const { activeItem, rootUrl, menuItems, clickEvent } = props;
-  const updatedItems = props.menuItems.map(item => (
+  const updatedItems = menuItems.map(item => (
     <MailboxMenuItem
-      key = { item.name }
-      iName = { item.name }
-      iActived = { activeItem === item.name }
-      iTargetUrl = { item.url }
-      iRootUrl = { rootUrl }
-      iUnread = { item.label.unread }
-      iOnClick = { clickEvent }
+      key={item.name}
+      iName={item.name}
+      iActived={activeItem === item.name}
+      iTargetUrl={item.url}
+      iRootUrl={rootUrl}
+      iUnread={item.label.unread}
+      iOnClick={clickEvent}
     >
-      { item.label.text }
+      {item.label.text}
     </MailboxMenuItem>
   ));
 
   return (
     <Menu fluid vertical tabular>
-      { updatedItems }
+      {updatedItems}
     </Menu>
-  )
+  );
 }
 
 MailboxMenu.propTypes = {
