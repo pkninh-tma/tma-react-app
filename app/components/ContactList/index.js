@@ -1,31 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Image, List } from 'semantic-ui-react';
+import ContactItem from 'components/ContactItem';
 
 function ContactList(props){
+
+  const contactItems = props.contacts.map(contact => (
+    <ContactItem key={contact.email} {...contact} />
+  ));
+
   return (
     <List divided verticalAlign='middle'>
-    <List.Item>
-      <List.Content floated='right'>
-        <p>01231837213</p>
-      </List.Content>
-      <Image avatar />
-      <List.Content>
-        <List.Header as='a'>Daniel Louise</List.Header>
-        <List.Description>crazy.boy@yahoo.com</List.Description>
-      </List.Content>
-    </List.Item>
-    <List.Item>
-      <List.Content floated='right'>
-        <p>11111111111</p>
-      </List.Content>
-      <Image avatar />
-      <List.Content>
-        <List.Header as='a'>Stevie Feliciano</List.Header>
-        <List.Description>magical.candy@hotmail.com</List.Description>
-      </List.Content>
-    </List.Item>
-  </List>
+      { contactItems }
+    </List>
   )
+}
+
+ContactList.propTypes = {
+  contacts: PropTypes.array
 }
 
 export default ContactList;

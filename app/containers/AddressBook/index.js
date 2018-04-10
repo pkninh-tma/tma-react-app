@@ -24,8 +24,32 @@ import ContactList from 'components/ContactList';
 
 export class AddressBook extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
+  state = {
+    contacts: [
+      {
+        firstName: 'Daniel',
+        lastName: 'Louise',
+        email: 'crazy.boy@yahoo.com',
+        phoneNumber: '01231837213'
+      },
+      {
+        firstName: 'Stevie',
+        lastName: 'Feliciano',
+        email: 'magical.candy@hotmail.com',
+        phoneNumber: '1133541111'
+      }
+    ]
+  }
+
   handleSubmit = (values) => {
-    console.log(values);
+    this.setState({
+      contacts: [...this.state.contacts, {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.mail,
+        phoneNumber: values.phone
+      }]
+    })
   }
 
   render() {
@@ -34,7 +58,7 @@ export class AddressBook extends React.Component { // eslint-disable-line react/
          <Grid.Column width={7}>
            <Segment>
              <p>Searching Bar</p>
-             <ContactList />
+             <ContactList contacts={ this.state.contacts }/>
            </Segment>
          </Grid.Column>
 
