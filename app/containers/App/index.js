@@ -21,6 +21,7 @@ import saga from './saga';
 
 import PrivateRoute from 'components/PrivateRoute';
 import MailBox from 'containers/MailBox/Loadable';
+import AddressBook from 'containers/AddressBook/Loadable';
 import Auth from 'containers/Authentication/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
@@ -43,6 +44,12 @@ class App extends React.Component {
           <PrivateRoute
             path="/inbox"
             component={MailBox}
+            isLoggedIn={isLoggedIn}
+            onLogout={logoutEventHandler}
+          />
+          <PrivateRoute
+            path="/address-book"
+            component={AddressBook}
             isLoggedIn={isLoggedIn}
             onLogout={logoutEventHandler}
           />

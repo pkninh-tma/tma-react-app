@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Grid, Menu, Segment, Label } from 'semantic-ui-react';
+import { Grid, Segment } from 'semantic-ui-react';
 import { switchToMailBox } from './actions';
 import { connect } from 'react-redux';
 import { makeSelectActiveItem, makeSelectMenuItems } from './selectors';

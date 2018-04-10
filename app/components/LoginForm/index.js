@@ -21,12 +21,14 @@ function LoginForm (props) {
                 <Field
                   name="username"
                   type="text"
+                  icon="users"
                   component={FormInput}
                   label="Username"
                 />
                 <Field
                   name="password"
                   type="password"
+                  icon="key"
                   component={FormInput}
                   label="Password"
                 />

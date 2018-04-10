@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react';
 
 function FormInput (props) {
-  const { input, label, type, meta: { touched, error } } = props;
+  const { input, type, label, icon, meta: { touched, error } } = props;
   return (
     <Form.Field>
-      <label>{label}</label>
-      <div>
+      <div className="ui left icon input">
         <input {...input} type={type} placeholder={label} />
-        {touched && error && <span>{error}</span>}
+        <i className={`${icon} icon`}></i>
       </div>
+      {touched && error && <span>{error}</span>}
     </Form.Field>
   );
 };
