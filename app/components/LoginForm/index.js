@@ -1,8 +1,8 @@
 import React from 'react';
-import FormInput from 'components/FormInput';
 import PropTypes from 'prop-types';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form/immutable';
+import FormInput from '../../components/FormInput';
 import Wrapper from './Wrapper';
 import validate from './validate';
 
@@ -16,18 +16,20 @@ const LoginForm = ({ handleSubmit }) => (
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
           Log-in to your account
-            </Header>
+        </Header>
         <Form size="large" onSubmit={handleSubmit}>
           <Segment stacked>
             <Field
               name="username"
               type="text"
+              icon="users"
               component={FormInput}
               label="Username"
             />
             <Field
               name="password"
               type="password"
+              icon="key"
               component={FormInput}
               label="Password"
             />

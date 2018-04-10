@@ -23,6 +23,8 @@ import { authLogout } from '../../containers/Authentication/actions';
 import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
 
+import AddressBook from '../../containers/AddressBook/Loadable';
+
 const AppWrapper = styled.div`
   margin: 0 auto;
   display: flex;
@@ -37,6 +39,12 @@ const App = ({ isLoggedIn, logoutEventHandler }) => {
       <PrivateRoute
         path="/inbox"
         component={MailBox}
+        isLoggedIn={isLoggedIn}
+        onLogout={logoutEventHandler}
+      />
+      <PrivateRoute
+        path="/address-book"
+        component={AddressBook}
         isLoggedIn={isLoggedIn}
         onLogout={logoutEventHandler}
       />

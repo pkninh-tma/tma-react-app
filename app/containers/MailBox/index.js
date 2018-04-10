@@ -1,16 +1,17 @@
 import React from 'react';
-import injectReducer from 'utils/injectReducer';
-import { createStructuredSelector } from 'reselect';
-import PropTypes from 'prop-types';
-
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { Grid, Segment } from 'semantic-ui-react';
-import MailboxMenu from 'components/MailboxMenu';
-import MailList from 'containers/MailList';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import { switchToMailBox } from './actions';
 import { makeSelectActiveItem, makeSelectMenuItems } from './selectors';
+
+import injectReducer from '../../utils/injectReducer';
+
+import MailboxMenu from '../../components/MailboxMenu';
+import MailList from '../../containers/MailList';
 
 import reducer from './reducer';
 
