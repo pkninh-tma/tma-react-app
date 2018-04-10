@@ -5,11 +5,27 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  FETCH_CONTACTS,
+  FETCH_CONTACTS_SUCCESS,
+  FETCH_CONTACTS_FAIL,
 } from './constants';
 
-export function defaultAction() {
+export function fetchContacts() {
   return {
-    type: DEFAULT_ACTION,
+    type: FETCH_CONTACTS,
+  };
+}
+
+export function contactFetchedSuccess(contacts) {
+  return {
+    type: FETCH_CONTACTS_SUCCESS,
+    contacts
+  };
+}
+
+export function contactFetchedFail(error) {
+  return {
+    type: FETCH_CONTACTS_FAIL,
+    error
   };
 }

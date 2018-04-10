@@ -50,7 +50,7 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         isLoggedIn: false,
-        token: '',
+        tokenId: '',
         username: '',
       };
     case AUTH_REDIRECT_PATH:

@@ -5,15 +5,37 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  FETCH_CONTACTS,
+  FETCH_CONTACTS_SUCCESS,
+  FETCH_CONTACTS_FAIL,
 } from './constants';
 
-const initialState = {};
+const initialState = {
+  loading: false,
+  error: false,
+  contacts: [],
+};
 
 function addressBookReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
+    case FETCH_CONTACTS:
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    case FETCH_CONTACTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        contacts: action.contacts,
+      };
+    case FETCH_CONTACTS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
     default:
       return state;
   }

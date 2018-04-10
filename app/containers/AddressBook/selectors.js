@@ -14,12 +14,12 @@ const selectAddressBookDomain = state => state.addressBook;
  * Default selector used by AddressBook
  */
 
-const makeSelectAddressBook = () => createSelector(
+const makeSelectContacts = () => createSelector(
   selectAddressBookDomain,
-  substate => substate
+  substate => substate.contacts
 );
 
-export default makeSelectAddressBook;
 export {
   selectAddressBookDomain,
+  makeSelectContacts
 };
