@@ -1,11 +1,11 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { authSuccess, authLogout } from 'containers/Authentication/actions';
 import { replace } from 'react-router-redux';
+import { authSuccess, authLogout } from '../../containers/Authentication/actions';
 import {
   LOCAL_STORAGE_TOKEN,
   LOCAL_STORAGE_USERNAME,
   AUTH_LOG_OUT,
-} from 'containers/Authentication/constants';
+} from '../../containers/Authentication/constants';
 
 function* checkAuthState() {
   const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);

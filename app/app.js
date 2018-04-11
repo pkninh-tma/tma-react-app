@@ -18,12 +18,6 @@ import createHistory from 'history/createBrowserHistory';
 import 'sanitize.css/sanitize.css';
 import 'semantic-ui-css/semantic.min.css';
 
-// Import root app
-import App from 'containers/App';
-
-// Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
-
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-webpack-loader-syntax */
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
@@ -34,6 +28,12 @@ import '!file-loader?name=[name].[ext]!./images/icon-180x180.png';
 import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess'; // eslint-disable-line import/extensions
 /* eslint-enable import/no-webpack-loader-syntax */
+
+// Import root app
+import App from './containers/App';
+
+// Import Language Provider
+import LanguageProvider from './containers/LanguageProvider';
 
 import configureStore from './configureStore';
 

@@ -12,12 +12,12 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { compose as recompose, withHandlers } from 'recompose';
-import { authStart } from 'containers/Authentication/actions';
+import { authStart } from '../../containers/Authentication/actions';
 // import { Redirect } from 'react-router-dom';
 // import messages from './messages';
-import LoginForm from 'components/LoginForm';
-import Spinner from 'components/LoadingIndicator';
-import injectSaga from 'utils/injectSaga';
+import LoginForm from '../../components/LoginForm';
+import Spinner from '../../components/LoadingIndicator';
+import injectSaga from '../../utils/injectSaga';
 
 import { makeSelectLoading } from './selectors';
 

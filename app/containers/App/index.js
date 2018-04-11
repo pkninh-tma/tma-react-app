@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import PrivateRoute from 'components/PrivateRoute';
+import PrivateRoute from '../../components/PrivateRoute';
 import MailBox from '../../containers/MailBox/Loadable';
 import Auth from '../../containers/Authentication/Loadable';
 import NotFoundPage from '../../containers/NotFoundPage/Loadable';

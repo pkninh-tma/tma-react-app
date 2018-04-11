@@ -1,12 +1,12 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { authSuccess, authFail } from 'containers/Authentication/actions';
 import { push } from 'react-router-redux';
+import { authSuccess, authFail } from '../../containers/Authentication/actions';
 import {
   AUTH_START,
   LOCAL_STORAGE_TOKEN,
   LOCAL_STORAGE_USERNAME,
-} from 'containers/Authentication/constants';
-import request from 'utils/request';
+} from '../../containers/Authentication/constants';
+import request from '../../utils/request';
 
 const postConfig = {
   method: 'POST',

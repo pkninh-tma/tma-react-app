@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FormInput from 'components/FormInput';
 import { Field, reduxForm } from 'redux-form/immutable';
 import { Button, Form, Grid } from 'semantic-ui-react';
+import FormInput from '../../components/FormInput';
 
 function ContactForm(props) {
   const { handleSubmit, isUpdate, // item

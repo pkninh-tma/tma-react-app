@@ -1,9 +1,9 @@
 import { call, put } from 'redux-saga/effects';
-import { fetchContacts, contactFetchedSuccess, contactFetchedFail } from 'containers/AddressBook/actions';
+import request from 'utils/request';
+import { fetchContacts, contactFetchedSuccess, contactFetchedFail } from '../../containers/AddressBook/actions';
 // import {
 //   FETCH_CONTACTS,
 // } from 'containers/AddressBook/constants';
-import request from 'utils/request';
 
 const requestURL = 'api/contact';
 

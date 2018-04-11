@@ -1,7 +1,7 @@
 import React from 'react';
-import MailboxMenuItem from 'components/MailboxMenuItem';
 import PropTypes from 'prop-types';
 import { Menu } from 'semantic-ui-react';
+import MailboxMenuItem from '../../components/MailboxMenuItem';
 
 function MailboxMenu(props) {
   const { activeItem, rootUrl, menuItems, clickEvent } = props;

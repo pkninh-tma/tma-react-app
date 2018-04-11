@@ -12,8 +12,8 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Grid, Segment, Input } from 'semantic-ui-react';
 
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
 import { searchInContact, updateContact } from './actions';
 import reducer from './reducer';
 import saga from './saga';

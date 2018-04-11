@@ -12,24 +12,18 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Table, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { lifecycle } from 'recompose';
-
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import MailItem from 'components/MailItem';
-import Spinner from 'components/Spinner';
+import withLifecycle from '@hocs/with-lifecycle';
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
+import MailItem from '../../components/MailItem';
+import Spinner from '../../components/Spinner';
 import { makeSelectMailData, makeSelectMailLoading } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 // import messages from './messages';
 import { loadMails, mailReaded } from './actions';
 
-const StatelessMailList = ({ mailData, loading, readMailHandler }) => {
-  // componentDidMount() {
-  //   loadData();
-  // }
-
-  // const {  } = this.props;
+export const StatelessMailList = ({ mailData, loading, readMailHandler }) => {
   const getRows = () => {
     if (!loading) {
       return mailData.map(item => {
@@ -79,9 +73,9 @@ StatelessMailList.propTypes = {
   readMailHandler: PropTypes.any,
 };
 
-const MailList = lifecycle({
-  componentDidMount() {
-    this.props.loadData();
+const MailList = withLifecycle({
+  onDidMount({ loadData }) {
+    loadData();
   },
 })(StatelessMailList);
 
