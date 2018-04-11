@@ -27,6 +27,11 @@ const makeSelectLoading = () => createSelector(
   state => state.loading
 );
 
+const makeSelectError = () => createSelector(
+  selectAuthDomain,
+  state => state.error
+);
+
 const makeSelectIsExpired = () => createSelector(
   selectAuthDomain,
   state => state.isExpired
@@ -37,5 +42,6 @@ export {
   makeSelectToken,
   makeSelectIsLoggedIn,
   makeSelectLoading,
+  makeSelectError,
   makeSelectIsExpired,
 };

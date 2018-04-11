@@ -1,9 +1,9 @@
-import { put, call, takeEvery, take } from 'redux-saga/effects';
+import { put, call, takeEvery, take, select } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import { replace } from 'react-router-redux';
 import request from 'utils/request';
-import { authSuccess, authLogout } from '../../containers/Authentication/actions';
-// import { makeSelectIsLoggedIn } from '../../containers/Authentication/selectors';
+import { authSuccess, authLogout, authTokenExpired } from '../../containers/Authentication/actions';
+import { makeSelectIsExpired } from '../../containers/Authentication/selectors';
 import {
   LOCAL_STORAGE_TOKEN,
   LOCAL_STORAGE_USERNAME,
@@ -25,7 +25,6 @@ function* checkAuthState() {
 }
 
 function* doLogout() {
-  console.log('Is it really goes here!!!!!!!!');
   localStorage.removeItem(LOCAL_STORAGE_TOKEN);
   localStorage.removeItem(LOCAL_STORAGE_USERNAME);
   yield put(replace('/login'));
@@ -53,25 +52,26 @@ function countDown(expirationTime) {
 }
 
 export function* checkToken() {
-  const checking = yield call(countDown, 2000);
+  const checking = yield call(countDown, 60000);
   try {
     /* eslint-disable fp/no-loops */
     while (true) {
       const tokenId = yield take(checking);
-      console.log(`TokenId: ${tokenId}`);
-      // const response =
-      yield call(request, requestURL, {
+      console.log(`Checking tokenId`);
+      const response = yield call(request, requestURL, {
         method: 'HEAD',
         headers: new Headers({
           Authorization: `Bearer ${tokenId}`,
         }),
       });
     }
+  } catch(err) {
+    const isExpired = yield select(makeSelectIsExpired());
+    if(!isExpired){
+      yield put(authTokenExpired());
+    }
   } finally {
     console.log('Checked process has been terminated');
-    // const isLoggedIn = yield select(makeSelectIsLoggedIn());
-
-    yield put(authLogout());
     checking.close();
   }
 }
