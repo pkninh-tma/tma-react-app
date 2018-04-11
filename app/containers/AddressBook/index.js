@@ -23,12 +23,12 @@ import {
   makeSelectLoading,
   makeSelectSearchKeys,
   makeSelectUpdating,
-  makeSelectUpdatedItem
+  makeSelectUpdatedItem,
 } from './selectors';
 
-import ContactForm from 'components/ContactForm';
-import ContactList from 'components/ContactList';
-import LoadingIndicator from 'components/LoadingIndicator';
+import ContactForm from '../../components/ContactForm';
+import ContactList from '../../components/ContactList';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 const AddressBook = ({ loading, displayContact, searchKeys, updating, updatedItem, searchChangeHandler, updateContactHandler }) => (
   <Grid>
@@ -42,12 +42,12 @@ const AddressBook = ({ loading, displayContact, searchKeys, updating, updatedIte
                 <Input
                   placeholder="Search ..."
                   fluid
-                  value={ searchKeys }
-                  onChange={ e => searchChangeHandler(e.target.value) }
+                  value={searchKeys}
+                  onChange={e => searchChangeHandler(e.target.value)}
                 />
                 <ContactList
-                  contacts={ displayContact }
-                  clicked={ updateContactHandler }
+                  contacts={displayContact}
+                  clicked={updateContactHandler}
                 />
               </div>
             )
@@ -58,20 +58,23 @@ const AddressBook = ({ loading, displayContact, searchKeys, updating, updatedIte
     <Grid.Column stretched width={9}>
       <Segment>
         <ContactForm
-          onSubmit={()=> console.log("TODO: Implement on submit()")}
-          isUpdate={ updating }
-          item={ updatedItem }
+          onSubmit={() => console.log('TODO: Implement on submit()')}
+          isUpdate={updating}
+          item={updatedItem}
         />
       </Segment>
     </Grid.Column>
   </Grid>
-)
+);
 
 AddressBook.propTypes = {
   displayContact: PropTypes.array,
   loading: PropTypes.bool,
   searchKeys: PropTypes.string,
   searchChangeHandler: PropTypes.func,
+  updating: PropTypes.any,
+  updatedItem: PropTypes.any,
+  updateContactHandler: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -82,11 +85,11 @@ const mapStateToProps = createStructuredSelector({
   updatedItem: makeSelectUpdatedItem(),
 });
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
-    searchChangeHandler: (val) => dispatch(searchInContact(val)),
-    updateContactHandler: (id) => dispatch(updateContact(id)),
-  }
+    searchChangeHandler: val => dispatch(searchInContact(val)),
+    updateContactHandler: id => dispatch(updateContact(id)),
+  };
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

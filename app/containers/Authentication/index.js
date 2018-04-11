@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
+import { compose as recompose, withHandlers } from 'recompose';
 import { authStart } from 'containers/Authentication/actions';
 // import { Redirect } from 'react-router-dom';
 // import messages from './messages';
@@ -22,26 +23,26 @@ import { makeSelectLoading } from './selectors';
 
 import saga from './saga';
 
-export class Authentication extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export const StatelessAuthentication = ({ handleSubmit, loading }) => (
+  <div>
+    <LoginForm onSubmit={handleSubmit} />;
+        {loading ? <Spinner /> : null}
+  </div>
+);
 
-  handleSubmit = values => {
-    this.props.loginEventHandler(values);
-  }
-
-  render() {
-    return (
-      <div>
-        <LoginForm onSubmit={this.handleSubmit} />;
-        {this.props.loading ? <Spinner /> : null}
-      </div>
-    );
-  }
-}
-
-Authentication.propTypes = {
-  loginEventHandler: PropTypes.func,
+StatelessAuthentication.propTypes = {
+  handleSubmit: PropTypes.func,
   loading: PropTypes.any,
 };
+
+
+const Authentication = recompose(
+  withHandlers({
+    handleSubmit: props => values => {
+      props.loginEventHandler(values);
+    },
+  })
+);
 
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),

@@ -33,11 +33,11 @@ const makeSelectUpdating = () => createSelector(
   selectAddressBookDomain,
   substate => substate.updating
 );
-
+/* eslint-disable no-underscore-dangle */
 const makeSelectUpdatedItem = () => createSelector(
   selectAddressBookDomain,
   substate => {
-    if(substate.updatedId !== null){
+    if (substate.updatedId !== null) {
       return substate.contacts.find(contact => contact._id === substate.updatedId);
     }
     return null;
@@ -47,7 +47,7 @@ const makeSelectUpdatedItem = () => createSelector(
 const makeSelectContactFiltered = () => createSelector(
   selectAddressBookDomain,
   substate => {
-    if(substate.searchKeys !== '') {
+    if (substate.searchKeys !== '') {
       return substate.contacts.filter(contact => {
         const fullName = `${contact.firstName} ${contact.lastName}`;
         return fullName.toLowerCase().includes(substate.searchKeys);
@@ -64,5 +64,5 @@ export {
   makeSelectSearchKeys,
   makeSelectUpdating,
   makeSelectUpdatedItem,
-  makeSelectContactFiltered
+  makeSelectContactFiltered,
 };

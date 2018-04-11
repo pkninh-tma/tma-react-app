@@ -21,27 +21,27 @@ export function fetchContacts() {
 export function contactFetchedSuccess(contacts) {
   return {
     type: FETCH_CONTACTS_SUCCESS,
-    contacts
+    contacts,
   };
 }
 
 export function contactFetchedFail(error) {
   return {
     type: FETCH_CONTACTS_FAIL,
-    error
+    error,
   };
 }
 
 export function searchInContact(value) {
   return {
     type: SEARCHING,
-    value
+    value,
   };
 }
 
 export function updateContact(contactId) {
   return {
     type: UPDATE_CONTACT,
-    contactId
+    contactId,
   };
 }

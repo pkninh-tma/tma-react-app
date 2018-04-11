@@ -16,15 +16,11 @@ import { appLocales } from '../../i18n';
 import { changeLocale } from '../LanguageProvider/actions';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 
-export class LocaleToggle extends React.PureComponent {
-  render() {
-    return (
-      <Wrapper>
-        <Toggle value={this.props.locale} values={appLocales} messages={messages} onToggle={this.props.onLocaleToggle} />
-      </Wrapper>
-    );
-  }
-}
+export const LocaleToggle = ({ locale, onLocaleToggle }) => (
+  <Wrapper>
+    <Toggle value={locale} values={appLocales} messages={messages} onToggle={onLocaleToggle} />
+  </Wrapper>
+);
 
 LocaleToggle.propTypes = {
   onLocaleToggle: PropTypes.func,
