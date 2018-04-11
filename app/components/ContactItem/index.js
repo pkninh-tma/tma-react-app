@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Image, List } from 'semantic-ui-react';
 
 function ContactItem(props) {
-  const { firstName, lastName, email, phoneNumber } = props;
+  const { firstName, lastName, email, phone } = props;
   return (
     <List.Item onClick={props.clickListener}>
       <List.Content floated="right">
-        <p>{phoneNumber}</p>
+        <p>{phone}</p>
       </List.Content>
       <Image avatar />
       <List.Content>
@@ -22,7 +22,7 @@ ContactItem.propTypes = {
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   email: PropTypes.string,
-  phoneNumber: PropTypes.string,
+  phone: PropTypes.string,
   clickListener: PropTypes.func,
 };
 
