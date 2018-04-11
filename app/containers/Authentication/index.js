@@ -42,7 +42,7 @@ const Authentication = recompose(
       props.loginEventHandler(values);
     },
   })
-);
+)(StatelessAuthentication);
 
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),

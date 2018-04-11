@@ -24,7 +24,7 @@ import saga from './saga';
 // import messages from './messages';
 import { loadMails, mailReaded } from './actions';
 
-const PureMailList = ({ mailData, loading, readMailHandler }) => {
+const StatelessMailList = ({ mailData, loading, readMailHandler }) => {
   // componentDidMount() {
   //   loadData();
   // }
@@ -72,7 +72,7 @@ const PureMailList = ({ mailData, loading, readMailHandler }) => {
   return mailList();
 };
 
-PureMailList.propTypes = {
+StatelessMailList.propTypes = {
   mailData: PropTypes.any,
   loading: PropTypes.any,
   // loadData: PropTypes.any,
@@ -83,7 +83,7 @@ const MailList = lifecycle({
   componentDidMount() {
     this.props.loadData();
   },
-})(PureMailList);
+})(StatelessMailList);
 
 const mapStateToProps = createStructuredSelector({
   mailData: makeSelectMailData(),
