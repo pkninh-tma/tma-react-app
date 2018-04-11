@@ -11,6 +11,7 @@ import {
   AUTH_CHECK_TOKEN,
   AUTH_LOG_OUT,
   AUTH_REDIRECT_PATH,
+  AUTH_TOKEN_EXPIRED,
 } from './constants';
 
 export const authStart = authInfo => ({
@@ -41,4 +42,8 @@ export const authCheckToken = () => ({
 
 export const authLogout = () => ({
   type: AUTH_LOG_OUT,
+});
+
+export const authTokenExpired = () => ({
+  type: AUTH_TOKEN_EXPIRED,
 });

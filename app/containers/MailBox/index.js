@@ -28,7 +28,7 @@ const Mailbox = ({ activeItem, menuItems, switchMailboxEventHandler, match: { ur
 
     <Grid.Column stretched width={14}>
       <Segment>
-        <Route path={`${url}/sent`} component={() => (<p>Sent</p>)} />
+        <Route path={`${url}/sent`} component={() => (<p>Sent</p>)}/>
         <Route path={`${url}/trash`} component={() => (<p>Trash</p>)} />
         <Route path={`${url}/`} exact component={MailList} />
       </Segment>

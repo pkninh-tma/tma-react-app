@@ -10,16 +10,14 @@ import {
   AUTH_FAIL,
   AUTH_LOG_OUT,
   AUTH_REDIRECT_PATH,
-  // LOCAL_STORAGE_TOKEN,
-  // LOCAL_STORAGE_USERNAME,
+  AUTH_TOKEN_EXPIRED,
 } from './constants';
 
 const initialState = {
-  // tokenId: null,
-  // username: null,
   loading: false,
   error: false,
   isLoggedIn: false,
+  isExpired: false,
   authRedirectPath: '/',
 };
 
@@ -34,8 +32,9 @@ function authReducer(state = initialState, action) {
     case AUTH_SUCCESS:
       return {
         ...state,
-        loading: false,
         isLoggedIn: true,
+        loading: false,
+        isExpired: false,
         tokenId: action.token,
         username: action.username,
       };
@@ -43,15 +42,21 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         isLoggedIn: false,
-        error: action.error,
         loading: false,
+        error: action.error,
       };
     case AUTH_LOG_OUT:
       return {
         ...state,
         isLoggedIn: false,
+        isExpired: false,
         tokenId: '',
         username: '',
+      };
+    case AUTH_TOKEN_EXPIRED:
+      return {
+        ...state,
+        isExpired: true,
       };
     case AUTH_REDIRECT_PATH:
       return {

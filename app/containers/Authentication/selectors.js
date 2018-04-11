@@ -27,9 +27,15 @@ const makeSelectLoading = () => createSelector(
   state => state.loading
 );
 
+const makeSelectIsExpired = () => createSelector(
+  selectAuthDomain,
+  state => state.isExpired
+);
+
 export {
   selectAuthDomain,
   makeSelectToken,
   makeSelectIsLoggedIn,
   makeSelectLoading,
+  makeSelectIsExpired,
 };

@@ -18,12 +18,12 @@ import PrivateRoute from 'components/PrivateRoute';
 import MailBox from '../../containers/MailBox/Loadable';
 import Auth from '../../containers/Authentication/Loadable';
 import NotFoundPage from '../../containers/NotFoundPage/Loadable';
-import { makeSelectIsLoggedIn } from '../../containers/Authentication/selectors';
+import AddressBook from '../../containers/AddressBook/Loadable';
+import Modal from 'components/Modal';
+import { makeSelectIsLoggedIn, makeSelectIsExpired } from '../../containers/Authentication/selectors';
 import { authLogout } from '../../containers/Authentication/actions';
 import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
-
-import AddressBook from '../../containers/AddressBook/Loadable';
 
 const AppWrapper = styled.div`
   margin: 0 auto;
@@ -32,7 +32,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-const App = ({ isLoggedIn, logoutEventHandler }) => {
+const App = ({ isLoggedIn, isExpired, logoutEventHandler }) => {
   const app = (
     <Switch>
       <Route path="/login" component={Auth} />
@@ -61,17 +61,25 @@ const App = ({ isLoggedIn, logoutEventHandler }) => {
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
       {app}
+      <Modal
+        showed={isExpired}
+        onClose={logoutEventHandler}
+        description={'Your session has timed out. Please sign in again.'}
+        btnLabel={'OK'}
+      />
     </AppWrapper>
   );
 };
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
+  isExpired: PropTypes.bool,
   logoutEventHandler: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   isLoggedIn: makeSelectIsLoggedIn(),
+  isExpired: makeSelectIsExpired(),
 });
 
 function mapDispatchToProps(dispatch) {

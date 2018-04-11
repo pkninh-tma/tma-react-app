@@ -10,7 +10,7 @@ import { BASE_API_URL } from './constants';
  */
 function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {
-    return null;
+    return {};
   }
   return response.json();
 }
@@ -27,7 +27,8 @@ function checkStatus(response) {
     return response;
   }
 
-  const error = new Error(response.statusText);
+  // const error = new Error(response.statusText);
+  const error = new Error();
   error.response = response;
   throw error;
 }
