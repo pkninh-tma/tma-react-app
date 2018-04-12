@@ -1,9 +1,9 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import request from 'utils/request';
 import { fetchContacts, contactFetchedSuccess, contactFetchedFail } from '../../containers/AddressBook/actions';
-import { authTokenExpired } from '../../containers/Authentication/actions';
+// import { authTokenExpired } from '../../containers/Authentication/actions';
 
-import { makeSelectIsExpired } from '../../containers/Authentication/selectors';
+// import { makeSelectIsExpired } from '../../containers/Authentication/selectors';
 // import {
 //   FETCH_CONTACTS,
 // } from 'containers/AddressBook/constants';
@@ -24,7 +24,7 @@ export function* fetchContactData() {
     }
     yield put(contactFetchedSuccess(response.items));
   } catch (err) {
-    console.log(err)
+    console.log(err);
     // const isExpired = yield select(makeSelectIsExpired());
     // if(!isExpired){
     //   yield put(authTokenExpired());

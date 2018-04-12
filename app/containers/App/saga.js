@@ -57,17 +57,17 @@ export function* checkToken() {
     /* eslint-disable fp/no-loops */
     while (true) {
       const tokenId = yield take(checking);
-      console.log(`Checking tokenId`);
-      const response = yield call(request, requestURL, {
+      console.log('Checking tokenId');
+      yield call(request, requestURL, {
         method: 'HEAD',
         headers: new Headers({
           Authorization: `Bearer ${tokenId}`,
         }),
       });
     }
-  } catch(err) {
+  } catch (err) {
     const isExpired = yield select(makeSelectIsExpired());
-    if(!isExpired){
+    if (!isExpired) {
       yield put(authTokenExpired());
     }
   } finally {

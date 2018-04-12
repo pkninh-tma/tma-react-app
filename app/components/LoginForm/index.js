@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import FormInput from '../../components/FormInput';
-import Wrapper from './Wrapper';
+// import Wrapper from './Wrapper';
 import validate from './validate';
 
-const LoginForm = ({ handleSubmit, error }) => (
-  <div className='login-form'>
+const LoginForm = ({ handleSubmit }) => (
+  <div className="login-form">
     {/*
       Heads up! The styles below are necessary for the correct render of this example.
       You can do same with CSS, the main idea is that all the elements up to the `Grid`
