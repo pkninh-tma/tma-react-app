@@ -6,7 +6,7 @@ import FormInput from '../../components/FormInput';
 import Wrapper from './Wrapper';
 import validate from './validate';
 
-const LoginForm = ({ handleSubmit, error }) => (
+const LoginForm = ({ handleSubmit, errorMsg }) => (
   <div className='login-form'>
     {/*
       Heads up! The styles below are necessary for the correct render of this example.
@@ -27,6 +27,12 @@ const LoginForm = ({ handleSubmit, error }) => (
       verticalAlign="middle"
     >
       <Grid.Column style={{ maxWidth: 450 }}>
+        { errorMsg ? (
+          <Message negative>
+            <Message.Header>{errorMsg}</Message.Header>
+          </Message>)
+          : null
+        }
         <Header as="h2" color="teal" textAlign="center">
           Log-in to your account
         </Header>
@@ -59,6 +65,7 @@ const LoginForm = ({ handleSubmit, error }) => (
 
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func,
+  errorMsg: PropTypes.string,
   // pristine: PropTypes.any,
   // reset: PropTypes.any,
   // submitting: PropTypes.any,

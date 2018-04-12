@@ -15,24 +15,23 @@ const postConfig = {
   },
 };
 
-const requestURL = 'api/login';
+const requestUrl = {
+  loginApi: 'api/login',
+}
 
 function* callAuthService(action) {
   try {
-    const response = yield call(request, requestURL, {
+    const response = yield call(request, requestUrl['loginApi'], {
       ...postConfig,
       body: JSON.stringify(action.authInfo),
     });
-
-    if (response.status === 'Fail') {
-      throw new Error(response.message);
-    }
     localStorage.setItem(LOCAL_STORAGE_TOKEN, response.token);
     localStorage.setItem(LOCAL_STORAGE_USERNAME, response.username);
     yield put(authSuccess(response.token, response.username));
     yield put(push('/inbox'));
   } catch (err) {
-    yield put(authFail(err));
+    const resBody = yield err.response.json();
+    yield put(authFail(resBody));
   }
 }
 

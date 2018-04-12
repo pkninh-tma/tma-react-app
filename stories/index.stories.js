@@ -22,7 +22,7 @@ storiesOf('Button', module)
 const props = {
   mailData: [{ from: 'ABC', subject: 'XYZ', time: '123' }],
   loading: false,
-  readMailHandler: () => console.log('mail list read handler'),
+  readMailHandler: action('mail list read'),
 };
 
 storiesOf('MailList', module)

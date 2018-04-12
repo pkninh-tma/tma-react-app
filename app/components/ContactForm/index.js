@@ -5,7 +5,7 @@ import { Button, Form, Grid } from 'semantic-ui-react';
 import FormInput from '../../components/FormInput';
 
 function ContactForm(props) {
-  const { handleSubmit, isUpdate, // item
+  const { handleSubmit, isUpdate, item
     // pristine, reset, submitting
   } = props;
   return (
@@ -40,7 +40,7 @@ function ContactForm(props) {
         </Grid.Column>
         <Grid.Column>
           <Field
-            name="mail"
+            name="email"
             type="mail"
             icon="mail"
             component={FormInput}

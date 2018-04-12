@@ -10,11 +10,11 @@ import { connect } from 'react-redux';
 // import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Grid, Segment, Input } from 'semantic-ui-react';
+import { Grid, Segment, Input, Icon, Button } from 'semantic-ui-react';
 
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
-import { searchInContact, updateContact } from './actions';
+import { searchInContact, updateContact, startAddContact, putContact } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 // import messages from './messages';
@@ -30,21 +30,41 @@ import ContactForm from '../../components/ContactForm';
 import ContactList from '../../components/ContactList';
 import LoadingIndicator from '../../components/LoadingIndicator';
 
-const AddressBook = ({ loading, displayContact, searchKeys, updating, updatedItem, searchChangeHandler, updateContactHandler }) => (
+const AddressBook = ({
+  loading,
+  updating,
+  searchKeys,
+  updatedItem,
+  displayContact,
+  searchChangeHandler,
+  updateContactHandler,
+  swithToAddLayoutHandler,
+  onSumitUpdateContact,
+}) => (
   <Grid>
     <Grid.Column width={7}>
       <Segment>
         {
           loading
             ? <LoadingIndicator />
-            : (
-              <div>
-                <Input
-                  placeholder="Search ..."
-                  fluid
-                  value={searchKeys}
-                  onChange={e => searchChangeHandler(e.target.value)}
-                />
+            : (<div>
+                <Grid columns={2}>
+                  <Grid.Row>
+                    <Grid.Column width={14}>
+                      <Input
+                        placeholder="Search ..."
+                        fluid
+                        value={searchKeys}
+                        onChange={e => searchChangeHandler(e.target.value)}
+                      />
+                    </Grid.Column>
+                    <Grid.Column width={2}>
+                      <Button icon disabled={!updating} onClick={swithToAddLayoutHandler}>
+                        <Icon name='add user' />
+                      </Button>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
                 <ContactList
                   contacts={displayContact}
                   clicked={updateContactHandler}
@@ -58,7 +78,7 @@ const AddressBook = ({ loading, displayContact, searchKeys, updating, updatedIte
     <Grid.Column stretched width={9}>
       <Segment>
         <ContactForm
-          onSubmit={() => console.log('TODO: Implement on submit()')}
+          onSubmit={onSumitUpdateContact}
           isUpdate={updating}
           item={updatedItem}
         />
@@ -89,6 +109,8 @@ function mapDispatchToProps(dispatch) {
   return {
     searchChangeHandler: val => dispatch(searchInContact(val)),
     updateContactHandler: id => dispatch(updateContact(id)),
+    swithToAddLayoutHandler: () => dispatch(startAddContact()),
+    onSumitUpdateContact: (values) => dispatch(putContact(values)),
   };
 }
 

@@ -11,23 +11,14 @@ import {
   AUTH_LOG_OUT,
 } from '../../containers/Authentication/constants';
 
-
-const requestURL = 'api/ping';
-
-function* checkAuthState() {
-  const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
-  if (!token) {
-    yield put(authLogout());
-  } else {
-    const username = localStorage.getItem(LOCAL_STORAGE_USERNAME);
-    yield put(authSuccess(token, username));
-  }
+const requestUrl = {
+    ping: 'api/ping',
+    logout: 'api/logout',
 }
 
-function* doLogout() {
+function clearLocalStorage(){
   localStorage.removeItem(LOCAL_STORAGE_TOKEN);
   localStorage.removeItem(LOCAL_STORAGE_USERNAME);
-  yield put(replace('/login'));
 }
 
 function emitTokenToChecker(emitter) {
@@ -51,6 +42,35 @@ function countDown(expirationTime) {
   });
 }
 
+function* checkAuthState() {
+  const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
+  if (!token) {
+    yield put(authLogout());
+  } else {
+    const username = localStorage.getItem(LOCAL_STORAGE_USERNAME);
+    yield put(authSuccess(token, username));
+  }
+}
+
+function* doLogout() {
+  try {
+    const tokenId = localStorage.getItem(LOCAL_STORAGE_TOKEN);
+    const response = yield call(request, requestUrl['logout'], {
+      method: 'POST',
+      headers: new Headers({
+        Authorization: `Bearer ${tokenId}`,
+      }),
+    });
+    yield call(clearLocalStorage);
+    yield put(replace('/login'));
+  } catch (err) {
+    if(err.response.status === 401){
+      yield call(clearLocalStorage);
+      yield put(replace('/login'));
+    }
+  }
+}
+
 export function* checkToken() {
   const checking = yield call(countDown, 60000);
   try {
@@ -58,7 +78,7 @@ export function* checkToken() {
     while (true) {
       const tokenId = yield take(checking);
       console.log(`Checking tokenId`);
-      const response = yield call(request, requestURL, {
+      const response = yield call(request, requestUrl['ping'], {
         method: 'HEAD',
         headers: new Headers({
           Authorization: `Bearer ${tokenId}`,

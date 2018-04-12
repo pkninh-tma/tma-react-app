@@ -15,7 +15,7 @@ import {
 
 const initialState = {
   loading: false,
-  error: false,
+  error: '',
   isLoggedIn: false,
   isExpired: false,
   authRedirectPath: '/',
@@ -27,7 +27,7 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        error: false,
+        error: '',
       };
     case AUTH_SUCCESS:
       return {
@@ -43,7 +43,7 @@ function authReducer(state = initialState, action) {
         ...state,
         isLoggedIn: false,
         loading: false,
-        error: action.error,
+        error: action.error.message,
       };
     case AUTH_LOG_OUT:
       return {

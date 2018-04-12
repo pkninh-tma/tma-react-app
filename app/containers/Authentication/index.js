@@ -19,13 +19,13 @@ import LoginForm from '../../components/LoginForm';
 import Spinner from '../../components/LoadingIndicator';
 import injectSaga from '../../utils/injectSaga';
 
-import { makeSelectLoading } from './selectors';
+import { makeSelectLoading, makeSelectError } from './selectors';
 
 import saga from './saga';
 
-export const StatelessAuthentication = ({ handleSubmit, loading }) => (
+export const StatelessAuthentication = ({ handleSubmit, loading, error }) => (
   <div>
-    <LoginForm onSubmit={handleSubmit} />;
+    <LoginForm onSubmit={handleSubmit} errorMsg={error}/>;
         {loading ? <Spinner /> : null}
   </div>
 );
@@ -47,6 +47,7 @@ const Authentication = recompose(
 
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
+  error: makeSelectError(),
 });
 
 function mapDispatchToProps(dispatch) {

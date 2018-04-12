@@ -45,7 +45,7 @@ const SideBar = ({ onLogout, children }) => (
           <NavLink to="/address-book">Address Book</NavLink>
         </li>
         <li>
-          <NavLink onClick={onLogout} to="/login">Logout</NavLink>
+          <NavLink onClick={onLogout} to="/logout">Logout</NavLink>
         </li>
       </ul>
     </SideNav>

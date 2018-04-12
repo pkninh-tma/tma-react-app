@@ -10,6 +10,10 @@ import {
   FETCH_CONTACTS_FAIL,
   UPDATE_CONTACT,
   SEARCHING,
+  ADDING,
+  PUT_CONTACT,
+  PUT_CONTACT_SUCCESS,
+  PUT_CONTACT_FAIL,
 } from './constants';
 
 const initialState = {
@@ -33,9 +37,36 @@ function addressBookReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        updating: false,
         contacts: action.contacts,
       };
     case FETCH_CONTACTS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case PUT_CONTACT:
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    case PUT_CONTACT_SUCCESS:
+    console.log(action.contact)
+      const updatedContacts = [...state.contacts].map(c => {
+        if(c._id === action.contact._id){
+          c = action.contact;
+        }
+        return c;
+      });
+      return {
+        ...state,
+        loading: false,
+        updating: true,
+        contacts: updatedContacts,
+      };
+    case PUT_CONTACT_FAIL:
       return {
         ...state,
         loading: false,
@@ -45,6 +76,12 @@ function addressBookReducer(state = initialState, action) {
       return {
         ...state,
         searchKeys: action.value,
+      };
+    case ADDING:
+      return {
+        ...state,
+        updating: false,
+        updatedId: null
       };
     case UPDATE_CONTACT:
       return {

@@ -10,6 +10,10 @@ import {
   FETCH_CONTACTS_FAIL,
   UPDATE_CONTACT,
   SEARCHING,
+  ADDING,
+  PUT_CONTACT,
+  PUT_CONTACT_SUCCESS,
+  PUT_CONTACT_FAIL,
 } from './constants';
 
 export function fetchContacts() {
@@ -32,6 +36,27 @@ export function contactFetchedFail(error) {
   };
 }
 
+export function putContact(data) {
+  return {
+    type: PUT_CONTACT,
+    data,
+  };
+}
+
+export function contactPutSuccess(contact) {
+  return {
+    type: PUT_CONTACT_SUCCESS,
+    contact,
+  };
+}
+
+export function contactPutFail(error) {
+  return {
+    type: PUT_CONTACT_FAIL,
+    error,
+  };
+}
+
 export function searchInContact(value) {
   return {
     type: SEARCHING,
@@ -43,5 +68,11 @@ export function updateContact(contactId) {
   return {
     type: UPDATE_CONTACT,
     contactId,
+  };
+}
+
+export function startAddContact() {
+  return {
+    type: ADDING,
   };
 }
