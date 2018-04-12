@@ -85,9 +85,9 @@ export function* checkToken() {
         }),
       });
     }
-  } catch(err) {
+  } catch (err) {
     const isExpired = yield select(makeSelectIsExpired());
-    if(!isExpired){
+    if (!isExpired) {
       yield put(authTokenExpired());
     }
   } finally {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import FormInput from '../../components/FormInput';
-import Wrapper from './Wrapper';
+// import Wrapper from './Wrapper';
 import validate from './validate';
 
 const LoginForm = ({ handleSubmit, errorMsg }) => (

@@ -33,7 +33,7 @@ export const StatelessAuthentication = ({ handleSubmit, loading, error }) => (
 StatelessAuthentication.propTypes = {
   handleSubmit: PropTypes.func,
   loading: PropTypes.bool,
-  error: PropTypes.string,
+  // error: PropTypes.string,
 };
 
 
