@@ -53,12 +53,14 @@ function addressBookReducer(state = initialState, action) {
         error: false,
       };
     case PUT_CONTACT_SUCCESS:
-    console.log(action.contact)
-      const updatedContacts = [...state.contacts].map(c => {
-        if(c._id === action.contact._id){
-          c = action.contact;
+      const updatedContacts = state.contacts.map(contact => {
+        if (contact._id === action.contact._id) {
+          return {
+            ...contact,
+            ...action.contact,
+          };
         }
-        return c;
+        return contact;
       });
       return {
         ...state,
@@ -81,7 +83,7 @@ function addressBookReducer(state = initialState, action) {
       return {
         ...state,
         updating: false,
-        updatedId: null
+        updatedId: null,
       };
     case UPDATE_CONTACT:
       return {
