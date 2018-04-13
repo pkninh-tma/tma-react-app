@@ -11,6 +11,9 @@ import {
   UPDATE_CONTACT,
   SEARCHING,
   ADDING,
+  POST_CONTACT,
+  POST_CONTACT_SUCCESS,
+  POST_CONTACT_FAIL,
   PUT_CONTACT,
   PUT_CONTACT_SUCCESS,
   PUT_CONTACT_FAIL,
@@ -69,6 +72,26 @@ function addressBookReducer(state = initialState, action) {
         contacts: updatedContacts,
       };
     case PUT_CONTACT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case POST_CONTACT:
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    case POST_CONTACT_SUCCESS:
+      const newContacts = [...state.contacts, action.contact];
+      return {
+        ...state,
+        loading: false,
+        updating: true,
+        contacts: newContacts,
+      };
+    case POST_CONTACT_FAIL:
       return {
         ...state,
         loading: false,

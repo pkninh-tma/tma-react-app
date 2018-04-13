@@ -14,7 +14,7 @@ import { Grid, Segment, Input, Icon, Button } from 'semantic-ui-react';
 
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
-import { searchInContact, updateContact, startAddContact, putContact } from './actions';
+import { searchInContact, updateContact, startAddContact, putContact, postContact } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 // import messages from './messages';
@@ -40,6 +40,7 @@ const AddressBook = ({
   updateContactHandler,
   swithToAddLayoutHandler,
   onSumitUpdateContact,
+  onSumitCreateContact,
 }) => (
   <Grid>
     <Grid.Column width={7}>
@@ -78,7 +79,7 @@ const AddressBook = ({
     <Grid.Column stretched width={9}>
       <Segment>
         <ContactForm
-          onSubmit={onSumitUpdateContact}
+          onSubmit={updating ? onSumitUpdateContact : onSumitCreateContact}
           isUpdate={updating}
           item={updatedItem}
         />
@@ -111,6 +112,7 @@ function mapDispatchToProps(dispatch) {
     updateContactHandler: id => dispatch(updateContact(id)),
     swithToAddLayoutHandler: () => dispatch(startAddContact()),
     onSumitUpdateContact: (values) => dispatch(putContact(values)),
+    onSumitCreateContact: (values) => dispatch(postContact(values)),
   };
 }
 

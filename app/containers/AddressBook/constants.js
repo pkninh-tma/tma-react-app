@@ -8,6 +8,10 @@ export const FETCH_CONTACTS = 'app/AddressBook/FETCH_CONTACTS';
 export const FETCH_CONTACTS_SUCCESS = 'app/AddressBook/FETCH_CONTACTS_SUCCESS';
 export const FETCH_CONTACTS_FAIL = 'app/AddressBook/FETCH_CONTACTS_FAIL';
 
+export const POST_CONTACT = 'app/AddressBook/POST_CONTACTS';
+export const POST_CONTACT_SUCCESS = 'app/AddressBook/POST_CONTACTS_SUCCESS';
+export const POST_CONTACT_FAIL = 'app/AddressBook/POST_CONTACTS_FAIL';
+
 export const PUT_CONTACT = 'app/AddressBook/PUT_CONTACTS';
 export const PUT_CONTACT_SUCCESS = 'app/AddressBook/PUT_CONTACTS_SUCCESS';
 export const PUT_CONTACT_FAIL = 'app/AddressBook/PUT_CONTACTS_FAIL';
